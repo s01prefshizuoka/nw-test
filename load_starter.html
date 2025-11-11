@@ -10,25 +10,41 @@
     <p>このボタンを押すと、自動的に複数のダウンロードが開始されます。</p>
     <p>ブラウザの動作が重くなる場合がありますが、画面を閉じずにしばらくお待ちください。</p>
 
-    <button onclick="startDownloadTabs()">
+    <button id="startButton" onclick="startLoadTest()">
         試験開始！ (ダウンロードを3回開始します)
     </button>
+    
+    <div id="status"></div>
+    <div id="iframeContainer"></div>
 
     <script>
         // 設定パラメータ
-        const TARGET_URL = "https://soichi01hagiwara-cell.github.io/nw-test/testfile.zip"; 
-        const NUM_DOWNLOADS = 3; // ★ 1台のChromebookで開くタブの数
+        const TARGET_URL = "https://[あなたのユーザー名].github.io/[リポジトリ名]/testfile.zip";
+        const NUM_DOWNLOADS = 3; // ★ 1台のChromebookで同時に開始するダウンロード数
+        // -----------------------------------------------------------------------
 
-        function startDownloadTabs() {
-            document.querySelector('h1').textContent = "試験実行中...";
-            document.querySelector('button').disabled = true;
+        function startLoadTest() {
+            const statusDiv = document.getElementById('status');
+            const container = document.getElementById('iframeContainer');
+            const startButton = document.getElementById('startButton');
 
+            // ボタンとステータスの更新
+            startButton.disabled = true;
+            statusDiv.innerHTML = "<h2>試験実行中... ダウンロードが開始するまでお待ちください。</h2>";
+            
+            // iFrame生成で複数のダウンロードを強制的に開始
             for (let i = 0; i < NUM_DOWNLOADS; i++) {
-                // 新しいタブを開いてダウンロードURLにアクセス
-                window.open(TARGET_URL, '_blank'); 
+                const iframe = document.createElement('iframe');
+                // iframeを非表示にして、画面には表示しない
+                iframe.style.display = 'none'; 
+                // ダウンロードURLをiframeのソースに設定
+                iframe.src = TARGET_URL; 
+                // ボディに追加してダウンロードをトリガー
+                container.appendChild(iframe);
             }
             
-            alert(NUM_DOWNLOADS + "個のダウンロードを開始しました。画面を閉じずに待機してください。");
+            statusDiv.innerHTML += `<p>✅ ${NUM_DOWNLOADS} 個のダウンロードが開始されました。</p>`;
+            alert(`${NUM_DOWNLOADS} 個のダウンロードを開始しました。画面を閉じずに待機してください。`);
         }
     </script>
 
