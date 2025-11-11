@@ -40,7 +40,7 @@
     <h2 id="downloadStatus">現在のダウンロード回数: 0 回</h2>
 
     <button id="downloadButton" onclick="downloadSingleFile()">
-        負荷開始 (ダウンロード)
+        負荷開始 (ダウンロード)：放送の指示があるまで押さない
     </button>
     
     <p id="countdownMessage" style="color: red; font-weight: bold;"></p>
@@ -187,7 +187,7 @@
             // 3. 30秒後にボタンを再有効化する
             setTimeout(() => {
                 button.disabled = false;
-                button.textContent = '負荷開始 (1ファイル)';
+                button.textContent = '負荷開始 (ダウンロード)';
                 document.getElementById('countdownMessage').textContent = '次の負荷を開始可能です！';
             }, DISABLE_DURATION_MS);
         }
@@ -197,6 +197,7 @@
 
 </body>
 </html>
+
 
 
 
