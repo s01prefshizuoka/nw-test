@@ -3,19 +3,57 @@
 <head>
     <title>ネットワーク負荷試験スタート</title>
     <meta charset="UTF-8">
+    
+    <style>
+        #downloadButton {
+            /* 文字サイズを大きく */
+            font-size: 24px; 
+            /* ボタンの上下左右の余白を大きく */
+            padding: 15px 30px; 
+            /* ボタンの角を少し丸く */
+            border-radius: 8px; 
+            /* ボタンの色を目立つように */
+            background-color: #4CAF50; 
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        /* ボタンが無効化されたとき（30秒間）のスタイル */
+        #downloadButton:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
 
     <h1>校内ネットワーク負荷試験を開始します</h1>
-    <p>このボタンを押すごとにファイルが**1つ**ダウンロードされ、ネットワークに負荷をかけます。次のダウンロードまで**30秒**待つ必要があります。</p>
+    
+    <p style="font-size: 1.2em; color: blue; font-weight: bold;">
+        【重要】試験開始の放送があるまで、ダウンロードしないで待機してください。
+    </p>
+    
+    <p>ボタンを押すごとにファイルが**1つ**ダウンロードされ、ネットワークに負荷をかけます。次のダウンロードまで**30秒**待つ必要があります。</p>
     
     <h2 id="downloadStatus">現在のダウンロード回数: 0 回</h2>
 
     <button id="downloadButton" onclick="downloadSingleFile()">
-        負荷開始 (1ファイル)
+        負荷開始 (ダウンロード)
     </button>
     
     <p id="countdownMessage" style="color: red; font-weight: bold;"></p>
+    
+    <hr>
+    
+    <p>
+        試験終了後のアンケートに、ダウンロードできた回数（上記「現在のダウンロード回数」）を報告してください。
+    </p>
+    <p>
+        アンケートはこちらから：
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScT8Qf9IdCbnP-YtXgnj7OTlTfpfGCcxeEZgJbw_QcGzbI83w/viewform?usp=header" target="_blank">
+            試験終了報告アンケートフォーム
+        </a>
+    </p>
 
     <div id="iframeContainer"></div>
 
